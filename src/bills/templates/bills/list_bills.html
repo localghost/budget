@@ -1,0 +1,5 @@
+<div><a href="{% url 'bills:index' %}">main</a></div>
+
+{% if bills %}
+{% include "bills/bills_list.html" %}
+{% endif %}

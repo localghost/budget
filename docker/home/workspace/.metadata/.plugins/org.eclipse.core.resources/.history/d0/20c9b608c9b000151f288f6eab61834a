@@ -1,0 +1,7 @@
+<form name="bill" id="bill" method="post">
+    <div><span>Amount:</span><input type="text" name="amount"></div>
+    <input type="datetime" name="spent">
+    <select name="payment_method"></select>
+    <select name="category"></select>
+    <input type="button" value="Add">
+</form>

@@ -1,0 +1,13 @@
+<div><a href="{% url 'bills:list_bills' %}">wszystkie rachunki</a></div>
+
+<form name="bill" id="bill" method="post" action="{% url 'bills:index' %}">
+    {% csrf_token %}
+
+    {% include "bills/bill_form.html" %}
+    
+    <div><input type="submit" value="Add"></div>
+</form>
+
+{% if bills %}
+{% include "bills/bills_list.html" %}
+{% endif %}

@@ -1,0 +1,23 @@
+<div><a href="{% url 'list_bills' %}">list bills</a></div>
+
+<form name="bill" id="bill" method="post" action="{% url 'index' %}">
+    <div><span>Name:</span><input type="text" name="name" maxlength="200"></div>
+    <div><span>Amount:</span><input type="text" name="amount"></div>
+    <div><span>Spent date:</span><input type="datetime" name="spent"></div>
+
+    <div><span>Category:</span><select name="category">
+        <option value="null">brak</option>
+        {% for category in categories %}
+        <option value="{{ category.id }}">{{ category.name }}</option>
+        {% endfor %}
+    </select></div>
+
+    <div><span>Payed with:</span><select name="payment_method">
+        <option value="null">brak</option>
+        {% for payment_method in payment_methods %}
+        <option value="{{ payment_method.id }}">{{ payment_method.name }}</option>
+        {% endfor %}
+    </select></div>
+
+    <div><input type="submit" value="Add"></div>
+</form>

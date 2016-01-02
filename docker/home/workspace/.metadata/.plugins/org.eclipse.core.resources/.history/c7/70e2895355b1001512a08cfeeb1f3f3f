@@ -1,0 +1,43 @@
+from django.shortcuts import render
+from django.http import HttpResponse, HttpResponseRedirect
+from django.views.generic import View
+from django.core.urlresolvers import reverse
+
+from .models import Category, PaymentMethod, Bill
+from .forms import BillForm
+
+def index(request):
+# 	TODO render last X added bills
+	categories = Category.objects.all()
+	payment_methods = PaymentMethod.objects.all()
+	
+	context = {
+		'categories' : categories,
+		'payment_methods' : payment_methods,
+		'form' : BillForm()
+	}
+	return render(request, r'bills/index.html', context)
+
+class IndexView(View):
+	def post(self, request):
+		form = BillForm(request.POST)
+		if form.is_valid():
+			bill = form.save()
+			bill.save()
+			return HttpResponseRedirect(reverse('bills:index'))
+		else:
+			return render(request, r'bills/index.html', {'form': form})
+		
+	def get(self, request):
+		context = {
+			'form' : BillForm(),
+			'bills' : Bill.objects.order_by('updated')[:10]
+		}
+		return render(request, r'bills/index.html', context)
+	
+#class AddBillView(View):
+	#def post(self, request):
+		
+
+def list_bills(request):
+	return HttpResponse("Listing bills")

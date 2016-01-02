@@ -1,0 +1,33 @@
+from django.shortcuts import render
+from django.http import HttpResponse
+from django.views.generic import View
+
+from .models import Category, PaymentMethod
+
+def index(request):
+# 	TODO render last X added bills
+	categories = Category.objects.all()
+	payment_methods = PaymentMethod.objects.all()
+	
+	context = {
+		'categories' : categories,
+		'payment_methods' : payment_methods,
+	}
+	return render(request, r'bills/index.html', context)
+
+class IndexView(View):
+	def get(self, request):
+		categories = Category.objects.all()
+		payment_methods = PaymentMethod.objects.all()
+		
+		context = {
+			'categories' : categories,
+			'payment_methods' : payment_methods,
+		}
+		return render(request, r'bills/index.html', context)
+	
+class AddBillView(View):
+	def post(self, request):
+
+def list_bills(request):
+	return HttpResponse("Listing bills")
