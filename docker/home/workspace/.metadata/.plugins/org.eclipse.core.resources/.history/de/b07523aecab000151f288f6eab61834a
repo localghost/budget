@@ -1,9 +1,0 @@
-from django.shortcuts import render
-from django.http import HttpResponse
-
-def index(request):
-# 	TODO render bills from this month (how to define month?)
-	return render(request, r'bills/index.html')
-
-def list_bills(request):
-	return HttpResponse("Listing bills")

@@ -1,9 +1,0 @@
-<div><a href="{% url list_bills %}">list bills</a></div>
-
-<form name="bill" id="bill" method="post">
-    <div><span>Amount:</span><input type="text" name="amount"></div>
-    <div><span>Spent date:</span><input type="datetime" name="spent"></div>
-    <div><span>Payed with:</span><select name="payment_method"></select></div>
-    <div><span>Category:</span><select name="category"></select></div>
-    <div><input type="button" value="Add"></div>
-</form>
