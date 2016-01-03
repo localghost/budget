@@ -1,0 +1,18 @@
+{% extends 'registry/base.html' %}
+
+{% block scripts %}
+<script language="javascript">
+$(function() {
+    $('#start_date').datepicker({dateFormat: "yy-mm-dd"});
+    $('#end_date').datepicker({dateFormat: "yy-mm-dd"}).datepicker('setDate', new Date());
+});
+</script>
+{% endblock %}  
+
+{% block content %}
+<form name="report" id="report" action="{% url 'registry:report_view' %}">
+    <div><label for="start_date">Start date:</label><input type="date" id="start_date" name="start_date" /></div>
+    <div><label for="end_date">End date:</label><input type="date" id="end_date" name="end_date" /></div>
+    <div><input type="submit" value="view" /></div>
+</form>
+{% endblock %}

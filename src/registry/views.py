@@ -1,10 +1,16 @@
+import datetime
+import logging
+
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.views.generic import View
 from django.core.urlresolvers import reverse
+from django.utils.dateparse import parse_date
 
-from .models import IOModel
+from .models import IOModel, CategoryModel
 from .forms import IOForm
+
+logger = logging.getLogger(__name__)
 
 class IndexView(View):
 	def post(self, request):
@@ -57,3 +63,49 @@ class EditIOView(View):
 		form = IOForm(instance=IOModel.objects.get(pk=id))
 		request.session['referer'] = request.META.get('HTTP_REFERER', reverse('registry:index'))
 		return render(request, r'registry/edit_io.html', {'form': form, 'io_id': id})
+
+
+class ReportView(View):
+	def get(self, request):
+		return render(request, r'registry/report.html')
+
+class ReportViewView(View):
+	def get(self, request):
+		start_date = parse_date(request.GET.get('start_date'))
+		end_date = parse_date(request.GET.get('end_date', str(datetime.date.today())))
+		
+		# TODO both above can be None, report only error in that case
+
+		ios = IOModel.objects.filter(
+			registered__gte=start_date,
+			registered__lte=end_date
+		)
+		
+		total_outcome = total_income = 0
+		category_outcome = {}
+		
+		for io in ios:
+			if io.type == IOModel.INCOME:
+				total_income += io.amount
+			elif io.type == IOModel.OUTCOME:
+				total_outcome += io.amount
+				separator_position = io.category.name.find(CategoryModel.NAMESPACE_SEPARATOR)
+				while separator_position != -1:
+					amount = category_outcome.get(io.category.name[:separator_position], 0)
+					category_outcome[io.category.name[:separator_position]] = amount + io.amount
+					separator_position = io.category.name.find(CategoryModel.NAMESPACE_SEPARATOR, separator_position + 1)
+				amount = category_outcome.get(io.category.name, 0)
+				category_outcome[io.category.name] = amount + io.amount
+
+		return render(
+			request, r'registry/report_view.html',
+			{
+				'ios': ios,
+				'start_date': start_date,
+				'end_date': end_date,
+				'total_outcome': total_outcome,
+				'total_income': total_income,
+				'total_balance': total_income - total_outcome,
+				'category_outcome' : category_outcome,
+			}
+		)

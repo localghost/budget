@@ -3,14 +3,12 @@
 {% block scripts %}
 <script language="javascript">
 $(function() {
-    $('#id_registered').datepicker().datepicker('setDate', new Date());
+    $('#id_registered').datepicker({dateFormat: "yy-mm-dd"}).datepicker('setDate', new Date());
 });
 </script>
 {% endblock %}  
 
 {% block content %}
-<div><a href="{% url 'registry:list_io' %}">wszystkie wpisy</a></div>
-
 <form name="io" id="io" method="post" action="{% url 'registry:index' %}">
     {% csrf_token %}
 

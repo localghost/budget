@@ -25,4 +25,6 @@ urlpatterns = [
     url(r'^list_io$', views.ListIOView.as_view(), name='list_io'),
     url(r'^io/delete/(?P<id>\d+)/$', views.DeleteIOView.as_view(), name='delete_io'),
     url(r'^io/edit/(?P<id>\d+)/$', views.EditIOView.as_view(), name='edit_io'),
+    url(r'^report$', views.ReportView.as_view(), name='report'),
+    url(r'^report/view$', views.ReportViewView.as_view(), name='report_view'),
 ]

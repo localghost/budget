@@ -16,6 +16,8 @@ class PaymentMethodModel(models.Model):
 
 @python_2_unicode_compatible
 class CategoryModel(models.Model):
+    NAMESPACE_SEPARATOR = r'/'
+    
     name = models.CharField(max_length=200)
     
     class Meta:
