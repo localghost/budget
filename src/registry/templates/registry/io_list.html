@@ -1,4 +1,4 @@
-<table style="border-spacing: 5px 2px;">
+<table style="border-spacing: 0;">
 <tr>
     <th>Nazwa</th>
     <th>Typ</th>
@@ -6,9 +6,10 @@
     <th>Data rozliczenia</th>
     <th>Kategoria</th>
     <th>Płatność</th>
+    <th colspan="2"></th>
 </tr>
 {% for io in ios %}
-<tr>
+<tr class="{% cycle 'odd' 'even' %}">
     <td>{{ io.name }}</td>
     <td>{{ io.get_type_display }}</td>
     <td>{{ io.amount }}</td>

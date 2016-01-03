@@ -1,0 +1,5 @@
+.odd { background-color: #fff; }
+.even { background-color: #eee; }
+
+tr th { background-color: #ddd; padding: 5px; text-align: left; }
+tr td { padding: 5px; text-align: left; }

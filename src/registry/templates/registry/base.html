@@ -4,7 +4,10 @@
 <head>
     <title>Income/Outcome Registry</title>
 
-    <link rel="stylesheet" href="{% static 'registry/jquery-ui-themes/themes/smoothness/jquery-ui.css' %}">    
+    <link rel="stylesheet" href="{% static 'registry/jquery-ui-themes/themes/smoothness/jquery-ui.css' %}">
+    <link rel="stylesheet" href="{% static 'registry/main.css' %}">
+    {% block css %}{% endblock %}
+    
     <script src="{% static 'registry/jquery.js' %}"></script>
     <script src="{% static 'registry/jquery-ui/jquery-ui.js' %}"></script>
     {% block scripts %}{% endblock %}
