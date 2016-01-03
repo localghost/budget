@@ -3,3 +3,4 @@ docker/home/
 src/.project
 src/.pydevproject
 src/db.sqlite3
+src/deploy.sh
