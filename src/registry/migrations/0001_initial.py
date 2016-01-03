@@ -42,11 +42,11 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='bill',
             name='category',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='bills.Category'),
+            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='registry.Category'),
         ),
         migrations.AddField(
             model_name='bill',
             name='payment_method',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='bills.PaymentMethod'),
+            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='registry.PaymentMethod'),
         ),
     ]

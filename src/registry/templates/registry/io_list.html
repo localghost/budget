@@ -7,13 +7,15 @@
     <th>Kategoria</th>
     <th>Płatność</th>
 </tr>
-{% for bill in bills %}
+{% for io in ios %}
 <tr>
-    <td>{{ bill.name }}</td>
-    <td>{{ bill.get_type_display }}</td>
-    <td>{{ bill.spent|date:"d-m-Y" }}</td>
-    <td>{{ bill.category|default_if_none:"" }}</td>
-    <td>{{ bill.payment_method|default_if_none:"" }}</td>   
+    <td>{{ io.name }}</td>
+    <td>{{ io.get_type_display }}</td>
+    <td>{{ io.amount }}</td>
+    <td>{{ io.registered|date:"d-m-Y" }}</td>
+    <td>{{ io.category|default_if_none:"" }}</td>
+    <td>{{ io.payment_method|default_if_none:"" }}</td>
+    <td><a href="{% url 'registry:delete_io' io.id %}">delete</a></td>   
 </tr>
 {% endfor %}
 </table>

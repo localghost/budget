@@ -3,29 +3,35 @@ from django.http import HttpResponseRedirect
 from django.views.generic import View
 from django.core.urlresolvers import reverse
 
-from .models import BillModel
-from .forms import BillForm
+from .models import IOModel
+from .forms import IOForm
 
 class IndexView(View):
 	def post(self, request):
-		form = BillForm(request.POST)
+		form = IOForm(request.POST)
 		if form.is_valid():
-			bill = form.save()
-			bill.save()
-			return HttpResponseRedirect(reverse('bills:index'))
+			io = form.save()
+			io.save()
+			return HttpResponseRedirect(reverse('registry:index'))
 		else:
-			return render(request, r'bills/index.html', self._make_context_with_form(form))
+			return render(request, r'registry/index.html', self._make_context_with_form(form))
 		
 	def get(self, request):
-		return render(request, r'bills/index.html', self._make_context_with_form(BillForm()))
+		return render(request, r'registry/index.html', self._make_context_with_form(IOForm()))
 	
 	def _make_context_with_form(self, form):
 		return {
 			'form' : form,
-			'bills' : BillModel.objects.order_by('-spent')[:10]
+			'ios' : IOModel.objects.order_by('-registered')[:10]
 		}
 
 	
-class ListBillsView(View):
+class ListIOView(View):
 	def get(self, request):
-		return render(request, r'bills/list_bills.html', {'bills': BillModel.objects.all()})
+		return render(request, r'registry/list_io.html', {'ios': IOModel.objects.all()})
+
+
+class DeleteIOView(View):
+	def get(self, request, id):
+		IOModel.objects.get(pk=id).delete()
+		return HttpResponseRedirect(request.META.get('HTTP_REFERER', reverse('registry:index')))

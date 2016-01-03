@@ -1,7 +1,7 @@
 from django.forms import ModelForm
-from models import BillModel
+from models import IOModel
 
-class BillForm(ModelForm):
+class IOForm(ModelForm):
     class Meta:
-        model = BillModel
-        fields = ['name', 'type', 'amount', 'spent', 'category', 'payment_method']
+        model = IOModel
+        fields = ['name', 'type', 'amount', 'registered', 'category', 'payment_method']

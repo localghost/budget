@@ -1,13 +1,26 @@
-<div><a href="{% url 'bills:list_bills' %}">wszystkie rachunki</a></div>
+{% extends 'registry/base.html' %}
 
-<form name="bill" id="bill" method="post" action="{% url 'bills:index' %}">
+{% block scripts %}
+<script language="javascript">
+$(function() {
+    $('#id_registered').datepicker().datepicker('setDate', new Date());
+});
+</script>
+{% endblock %}  
+
+{% block content %}
+<div><a href="{% url 'registry:list_io' %}">wszystkie wpisy</a></div>
+
+<form name="io" id="io" method="post" action="{% url 'registry:index' %}">
     {% csrf_token %}
 
-    {% include "bills/bill_form.html" %}
+    {% include "registry/io_form.html" %}
     
     <div><input type="submit" value="Add"></div>
 </form>
 
-{% if bills %}
-{% include "bills/bills_list.html" %}
+{% if ios %}
+{% include "registry/io_list.html" %}
 {% endif %}
+
+{% endblock %}

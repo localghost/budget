@@ -1,5 +1,5 @@
-<div><a href="{% url 'bills:index' %}">main</a></div>
+<div><a href="{% url 'registry:index' %}">main</a></div>
 
-{% if bills %}
-{% include "bills/bills_list.html" %}
+{% if ios %}
+{% include "registry/io_list.html" %}
 {% endif %}
