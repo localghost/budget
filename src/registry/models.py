@@ -6,16 +6,24 @@ from django.utils.encoding import python_2_unicode_compatible
 @python_2_unicode_compatible
 class PaymentMethodModel(models.Model):
     name = models.CharField(max_length=200)
+
+    class Meta:
+        ordering = ['name']
     
     def __str__(self):
         return self.name
+
 
 @python_2_unicode_compatible
 class CategoryModel(models.Model):
     name = models.CharField(max_length=200)
     
+    class Meta:
+        ordering = ['name']
+     
     def __str__(self):
         return self.name
+    
 
 @python_2_unicode_compatible
 class IOModel(models.Model):
