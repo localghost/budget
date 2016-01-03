@@ -1,5 +1,9 @@
-<div><a href="{% url 'registry:index' %}">main</a></div>
+{% extends 'registry/base.html' %}
+
+{% block content %}
+<div><a href="{% url 'registry:index' %}">główna</a></div>
 
 {% if ios %}
 {% include "registry/io_list.html" %}
 {% endif %}
+{% endblock %}

@@ -33,5 +33,11 @@ class ListIOView(View):
 
 class DeleteIOView(View):
 	def get(self, request, id):
-		IOModel.objects.get(pk=id).delete()
-		return HttpResponseRedirect(request.META.get('HTTP_REFERER', reverse('registry:index')))
+		answer = request.GET.get('answer')
+		if answer:
+			if answer == 'yes':
+				IOModel.objects.get(pk=id).delete()
+			return HttpResponseRedirect(request.session.pop('referer', reverse('registry:index')))
+		else:
+			request.session['referer'] = request.META.get('HTTP_REFERER', reverse('registry:index'))
+			return render(request, r'registry/delete_io.html', {'io' : IOModel.objects.get(pk=id)})

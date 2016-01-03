@@ -1,0 +1,8 @@
+{% extends 'registry/base.html' %}
+
+{% block content %}
+Are you sure you want to delete "{{ io.name }}"?
+<a href="{% url 'registry:delete_io' io.id %}?answer=yes">yes</a>
+/
+<a href="{% url 'registry:delete_io' io.id %}?answer=no">no</a>
+{% endblock %}
