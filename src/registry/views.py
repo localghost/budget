@@ -41,3 +41,19 @@ class DeleteIOView(View):
 		else:
 			request.session['referer'] = request.META.get('HTTP_REFERER', reverse('registry:index'))
 			return render(request, r'registry/delete_io.html', {'io' : IOModel.objects.get(pk=id)})
+
+
+class EditIOView(View):
+	def post(self, request, id):
+		form = IOForm(request.POST, instance=IOModel.objects.get(pk=id))
+		if form.is_valid():
+			io = form.save()
+			io.save()
+			return HttpResponseRedirect(request.session.pop('referer', reverse('registry:index')))
+		else:
+			return render(request, r'registry/edit_io.html', {'form': form, 'io_id': id})
+	
+	def get(self, request, id):
+		form = IOForm(instance=IOModel.objects.get(pk=id))
+		request.session['referer'] = request.META.get('HTTP_REFERER', reverse('registry:index'))
+		return render(request, r'registry/edit_io.html', {'form': form, 'io_id': id})

@@ -15,7 +15,8 @@
     <td>{{ io.registered|date:"d-m-Y" }}</td>
     <td>{{ io.category|default_if_none:"" }}</td>
     <td>{{ io.payment_method|default_if_none:"" }}</td>
-    <td><a href="{% url 'registry:delete_io' io.id %}">delete</a></td>   
+    <td><a href="{% url 'registry:delete_io' io.id %}">delete</a></td>
+    <td><a href="{% url 'registry:edit_io' io.id %}">edit</a></td>
 </tr>
 {% endfor %}
 </table>

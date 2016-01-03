@@ -24,4 +24,5 @@ urlpatterns = [
     url(r'^$', views.IndexView.as_view(), name='index'),
     url(r'^list_io$', views.ListIOView.as_view(), name='list_io'),
     url(r'^io/delete/(?P<id>\d+)/$', views.DeleteIOView.as_view(), name='delete_io'),
+    url(r'^io/edit/(?P<id>\d+)/$', views.EditIOView.as_view(), name='edit_io'),
 ]
