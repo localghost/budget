@@ -1,4 +1,5 @@
-<table style="border-spacing: 0;">
+<table style="border-spacing: 0;" id="io_list">
+<thead>
 <tr>
     <th>Nazwa</th>
     <th>Typ</th>
@@ -8,6 +9,8 @@
     <th>Płatność</th>
     <th colspan="2"></th>
 </tr>
+</thead>
+<tbody>
 {% for io in ios %}
 <tr class="{% cycle 'odd' 'even' %}">
     <td>{{ io.name }}</td>
@@ -20,4 +23,5 @@
     <td><a href="{% url 'registry:edit_io' io.id %}">edit</a></td>
 </tr>
 {% endfor %}
+</tbody>
 </table>

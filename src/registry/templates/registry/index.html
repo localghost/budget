@@ -2,8 +2,11 @@
 
 {% block scripts %}
 <script language="javascript">
-$(function() {
+$(document).ready(function() {
     $('#id_registered').datepicker({dateFormat: "yy-mm-dd"}).datepicker('setDate', new Date());
+    {% if ios %}
+    $('#io_list').tablesorter();
+    {% endif %}
 });
 </script>
 {% endblock %}  

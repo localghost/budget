@@ -1,5 +1,15 @@
 {% extends 'registry/base.html' %}
 
+{% block scripts %}
+<script language="javascript">
+$(document).ready(function() {
+    {% if ios %}
+    $('#io_list').tablesorter();
+    {% endif %}
+});
+</script>
+{% endblock %} 
+
 {% block content %}
 {% if ios %}
 {% include "registry/io_list.html" %}
