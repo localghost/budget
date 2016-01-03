@@ -1,5 +1,5 @@
 import datetime
-import logging
+import collections
 
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
@@ -9,8 +9,6 @@ from django.utils.dateparse import parse_date
 
 from .models import IOModel, CategoryModel
 from .forms import IOForm
-
-logger = logging.getLogger(__name__)
 
 class IndexView(View):
 	def post(self, request):
@@ -106,6 +104,6 @@ class ReportViewView(View):
 				'total_outcome': total_outcome,
 				'total_income': total_income,
 				'total_balance': total_income - total_outcome,
-				'category_outcome' : category_outcome,
+				'category_outcome' : collections.OrderedDict(sorted(category_outcome.items(), key=lambda t: t[0])),
 			}
 		)
