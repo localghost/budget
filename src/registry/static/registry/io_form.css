@@ -1,0 +1,38 @@
+form#io {
+    text-align: left;
+    width: 600px;
+    margin: auto auto;
+    margin-bottom: 40px;
+}
+
+form#io input[type=text], input[type=number] {
+    border: 3px solid #ddd;
+    padding: 10px;
+}
+
+form#io select {
+    padding: 10px;
+}
+
+form#io input[type=submit] {
+    padding: 10px;
+}
+
+form#io div {
+    margin-bottom: 10px;
+}
+
+form#io label {
+    width: 200px;
+    display: inline-block;
+    font-variant: small-caps;
+}
+
+form#io #id_name {
+    width: 400px;
+}
+
+form#io #id_registered {
+    width: 140px;
+}
+

@@ -1,5 +1,7 @@
 {% extends 'registry/base.html' %}
 
+{% load staticfiles %}
+
 {% block scripts %}
 <script language="javascript">
 $(document).ready(function() {
@@ -8,7 +10,11 @@ $(document).ready(function() {
     {% endif %}
 });
 </script>
-{% endblock %} 
+{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'registry/io_list.css' %}">
+{% endblock %}
 
 {% block content %}
 {% if ios %}

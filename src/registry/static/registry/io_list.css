@@ -1,0 +1,23 @@
+table#io_list {
+    width: 100%;
+    border-spacing: 0;
+}
+
+table#io_list .odd {
+    background-color: #fff;
+}
+
+table#io_list .even {
+    background-color: #eee;
+}
+
+table#io_list tr th {
+    background-color: #ddd;
+    padding: 5px;
+    text-align: left;
+}
+
+table#io_list tr td {
+    padding: 5px;
+    text-align: left;
+}

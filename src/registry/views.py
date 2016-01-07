@@ -26,7 +26,7 @@ class IndexView(View):
 	def _make_context_with_form(self, form):
 		return {
 			'form' : form,
-			'ios' : IOModel.objects.order_by('-registered')[:10]
+			'ios' : IOModel.objects.order_by('-updated')[:10]
 		}
 
 	

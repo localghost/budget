@@ -13,6 +13,7 @@ RUN apt-get install -y sudo
 RUN apt-get install -y fonts-droid
 RUN apt-get install -y less
 RUN apt-get install -y git
+RUN apt-get install -y ansible
 
 RUN apt-get install -y python-pip
 RUN pip install Django

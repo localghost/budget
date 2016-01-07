@@ -1,5 +1,7 @@
 {% extends 'registry/base.html' %}
 
+{% load staticfiles %}
+
 {% block scripts %}
 <script language="javascript">
 $(document).ready(function() {
@@ -11,13 +13,18 @@ $(document).ready(function() {
 </script>
 {% endblock %}  
 
+{% block css %}
+<link rel="stylesheet" href="{% static 'registry/io_form.css' %}">
+<link rel="stylesheet" href="{% static 'registry/io_list.css' %}">
+{% endblock %}
+
 {% block content %}
 <form name="io" id="io" method="post" action="{% url 'registry:index' %}">
     {% csrf_token %}
 
     {% include "registry/io_form.html" %}
     
-    <div><input type="submit" value="Add"></div>
+    <div id="id_submit_div"><label></label><input type="submit" value="Add"></div>
 </form>
 
 {% if ios %}
