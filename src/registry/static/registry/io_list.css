@@ -1,6 +1,7 @@
 table#io_list {
     width: 100%;
     border-spacing: 0;
+    margin-bottom: 10px;
 }
 
 table#io_list .odd {
