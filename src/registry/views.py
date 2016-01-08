@@ -32,7 +32,7 @@ class IndexView(View):
 	
 class ListIOView(View):
 	def get(self, request):
-		return render(request, r'registry/list_io.html', {'ios': IOModel.objects.all()})
+		return render(request, r'registry/list_io.html', {'ios': IOModel.objects.all().order_by('registered')})
 
 
 class DeleteIOView(View):
