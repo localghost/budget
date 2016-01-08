@@ -1,40 +1,32 @@
-form#io {
+form#report {
     text-align: left;
     width: 600px;
     margin: auto auto;
     margin-bottom: 40px;
 }
 
-form#io input[type=text], input[type=number] {
+form#report input[type=date] {
     border: 3px solid #ddd;
     padding: 10px;
     font-family: Comfortaa, sans-serif;
-}
-
-form#io select {
-    padding: 10px;
-    font-family: Comfortaa, sans-serif;
-}
-
-form#io input[type=submit] {
-    padding: 10px;
-    font-family: Comfortaa, sans-serif;
-}
-
-form#io div {
-    margin-bottom: 10px;
-}
-
-form#io label {
-    width: 200px;
-    display: inline-block;
-}
-
-form#io #id_name {
-    width: 400px;
-}
-
-form#io #id_registered {
     width: 160px;
 }
 
+form#report input[type=submit] {
+    padding: 10px;
+    font-family: Comfortaa, sans-serif;
+    margin-left: 20px;
+}
+
+form#report div {
+    margin-bottom: 10px;
+}
+
+form#report label {
+    display: inline-block;
+    margin-right: 5px;
+}
+
+form#report label[for=end_date] {
+    margin-left: 20px;
+}

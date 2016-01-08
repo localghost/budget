@@ -71,13 +71,14 @@ class ReportViewView(View):
 	def get(self, request):
 		start_date = parse_date(request.GET.get('start_date'))
 		end_date = parse_date(request.GET.get('end_date', str(datetime.date.today())))
+		order_by = request.GET.get('order_by', 'registered')
 		
 		# TODO both above can be None, report only error in that case
 
 		ios = IOModel.objects.filter(
 			registered__gte=start_date,
 			registered__lte=end_date
-		)
+		).order_by(order_by)
 		
 		total_outcome = total_income = 0
 		category_outcome = {}

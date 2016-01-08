@@ -9,6 +9,8 @@ class PaymentMethodModel(models.Model):
 
     class Meta:
         ordering = ['name']
+        verbose_name = 'payment method'
+        verbose_name_plural = 'payment methods'
     
     def __str__(self):
         return self.name
@@ -22,6 +24,8 @@ class CategoryModel(models.Model):
     
     class Meta:
         ordering = ['name']
+        verbose_name = 'category'
+        verbose_name_plural = 'categories'
      
     def __str__(self):
         return self.name

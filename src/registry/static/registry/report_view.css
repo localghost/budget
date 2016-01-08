@@ -1,0 +1,16 @@
+span.label {
+    color: #000;
+}
+
+span.value {
+    color: blue;
+    margin-left: 10px;
+}
+
+div.section {
+    margin-bottom: 10px;
+}
+
+table#io_list {
+    margin-top: 20px;
+}

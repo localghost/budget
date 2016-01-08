@@ -6,18 +6,25 @@
 {% endblock %}
 
 {% block css %}
+<link rel="stylesheet" href="{% static 'registry/report_view.css' %}">
 <link rel="stylesheet" href="{% static 'registry/io_list.css' %}">
 {% endblock %}
 
 {% block content %}
-<div style="margin-bottom: 10px;">Od: {{ start_date }}, do: {{ end_date }}</div>
+<div class="section">
+    <span class="label">Raport za:</span><span class="value">{{ start_date }} - {{ end_date }}</span>
+</div>
 
-<div style="margin-bottom: 10px;">Przychód: {{ total_income }}, rozchód: {{ total_outcome }}, balans: {{ total_balance }}</div>
+<div class="section">
+    <span class="label">Przychód:</span><span class="value">{{ total_income }}</span>
+    <span class="label">, rozchód:</span><span class="value">{{ total_outcome }}</span>
+    <span class="label">, balans:</span><span class="value">{{ total_balance }}</span>       
+</div>
 
-<div style="margin-bottom: 10px;">
+<div class="section">
 <div class="header">Rozchód per kategoria:</div>
 {% for name, amount in category_outcome.items %}
-<div><span class="label">{{ name|default_if_none:'Brak kategorii' }}:</span> <span class="amount">{{ amount }}</span></div>
+<div><span class="label">{{ name|default_if_none:'Brak kategorii' }}:</span><span class="value">{{ amount }}</span></div>
 {% endfor %}
 </div>
 

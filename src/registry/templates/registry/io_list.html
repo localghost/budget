@@ -1,3 +1,5 @@
+{% load staticfiles %}
+
 <table id="io_list">
 <thead>
 <tr>
@@ -13,14 +15,18 @@
 <tbody>
 {% for io in ios %}
 <tr class="{% cycle 'odd' 'even' %}">
-    <td>{{ io.name }}</td>
+    <td style="width: 30%">{{ io.name }}</td>
     <td>{{ io.get_type_display }}</td>
     <td>{{ io.amount }}</td>
     <td>{{ io.registered|date:"d-m-Y" }}</td>
     <td>{{ io.category|default_if_none:"" }}</td>
     <td>{{ io.payment_method|default_if_none:"" }}</td>
-    <td><a href="{% url 'registry:delete_io' io.id %}">delete</a></td>
-    <td><a href="{% url 'registry:edit_io' io.id %}">edit</a></td>
+    <td style="text-align: right; width: 20px;">        
+        <a href="{% url 'registry:edit_io' io.id %}" title="edit"><img src="{% static 'registry/icons/edit.png' %}" alt="edit" /></a>
+    </td>
+    <td style="text-align: right; width: 20px;">
+        <a href="{% url 'registry:delete_io' io.id %}" title="delete"><img src="{% static 'registry/icons/delete.png' %}" alt="delete" /></a>
+    </td>
 </tr>
 {% endfor %}
 </tbody>

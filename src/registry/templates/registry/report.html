@@ -1,5 +1,7 @@
 {% extends 'registry/base.html' %}
 
+{% load staticfiles %}
+
 {% block scripts %}
 <script language="javascript">
 $(function() {
@@ -7,12 +9,18 @@ $(function() {
     $('#end_date').datepicker({dateFormat: "yy-mm-dd"}).datepicker('setDate', new Date());
 });
 </script>
-{% endblock %}  
+{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'registry/report_generator.css' %}">
+{% endblock %}
 
 {% block content %}
 <form name="report" id="report" action="{% url 'registry:report_view' %}">
-    <div><label for="start_date">Start date:</label><input type="date" id="start_date" name="start_date" /></div>
-    <div><label for="end_date">End date:</label><input type="date" id="end_date" name="end_date" /></div>
-    <div><input type="submit" value="view" /></div>
+    <div>
+        <label for="start_date">Od:</label><input type="date" id="start_date" name="start_date" />
+        <label for="end_date">Do:</label><input type="date" id="end_date" name="end_date" />
+        <input type="submit" value="view" />
+    </div>
 </form>
 {% endblock %}
