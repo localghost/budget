@@ -14,6 +14,25 @@ a:hover {
     background-color: #31698a; 
 }
 
+input {
+    font-family: Comfortaa, sans-serif;
+    font-family: 'Open Sans', sans-serif;
+    padding: 10px;
+}
+
+input[type=text], input[type=number] {
+    border: 3px solid #ddd;
+    font-size: 1em;
+}
+
+input[type=submit] {
+    font-size: 1em;
+}
+
+select {
+    font-size: 1em;
+}
+
 #mainmenu {
     margin-bottom: 20px;
     background-color: #aaa;
@@ -61,5 +80,5 @@ div.header {
 }
 
 div.middle {
-    margin-top: 20px;
+    margin-top: 40px;
 }

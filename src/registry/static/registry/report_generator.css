@@ -8,13 +8,11 @@ form#report {
 form#report input[type=date] {
     border: 3px solid #ddd;
     padding: 10px;
-    font-family: Comfortaa, sans-serif;
     width: 160px;
 }
 
 form#report input[type=submit] {
     padding: 10px;
-    font-family: Comfortaa, sans-serif;
     margin-left: 20px;
 }
 

@@ -11,6 +11,25 @@ from .models import IOModel, CategoryModel, BillingModel
 from .forms import IOForm
 from .reports import OverviewReport
 
+# class Referer(object):
+# 	refererFieldName = 'referer'
+# 	def __init__(self, request, default=None):
+# 		self.__referer = request.session.pop( # removing it
+# 			self.refererFieldName,
+# 			request.POST.get(
+# 				self.refererFieldName,
+# 				request.GET.get(
+# 					self.refererFieldName,
+# 					request.META.get('HTTP_REFERER')
+# 				)
+# 			)
+# 		)
+# 		if self.__referer is None:
+# 			self.__referer = default
+# 
+# 	def get(self):
+# 		return self.__referer
+
 class IndexView(View):
 	def post(self, request):
 		form = IOForm(request.POST)
