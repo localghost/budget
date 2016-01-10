@@ -2,23 +2,25 @@ form#io {
     text-align: left;
     width: 600px;
     margin: auto auto;
-    margin-bottom: 40px;
 }
 
 form#io input[type=text], input[type=number] {
     border: 3px solid #ddd;
     padding: 10px;
     font-family: Comfortaa, sans-serif;
+    font-size: 1em;
 }
 
 form#io select {
     padding: 10px;
     font-family: Comfortaa, sans-serif;
+    font-size: 1em;
 }
 
 form#io input[type=submit] {
     padding: 10px;
     font-family: Comfortaa, sans-serif;
+    font-size: 1em;
 }
 
 form#io div {

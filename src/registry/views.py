@@ -7,8 +7,9 @@ from django.views.generic import View
 from django.core.urlresolvers import reverse
 from django.utils.dateparse import parse_date
 
-from .models import IOModel, CategoryModel
+from .models import IOModel, CategoryModel, BillingModel
 from .forms import IOForm
+from .reports import OverviewReport
 
 class IndexView(View):
 	def post(self, request):
@@ -30,6 +31,15 @@ class IndexView(View):
 		}
 
 	
+class BillingsView(View):
+	def get(self, request):
+		billings = BillingModel.objects.all().order_by('-start_date')
+		report = None
+		if len(billings) != 0:
+			report = OverviewReport(billings[0].start_date, billings[0].end_date)
+		return render(request, r'registry/billings.html', {'billings': billings, 'report': report})
+	
+
 class ListIOView(View):
 	def get(self, request):
 		return render(request, r'registry/list_io.html', {'ios': IOModel.objects.all().order_by('registered')})
@@ -108,3 +118,9 @@ class ReportViewView(View):
 				'category_outcome' : collections.OrderedDict(sorted(category_outcome.items(), key=lambda t: t[0])),
 			}
 		)
+
+class BillingView(View):
+	def get(self, request, id):
+		billing = BillingModel.objects.get(pk=id)
+		report = OverviewReport(billing.start_date, billing.end_date)
+		return render(request, r'registry/billing_view.html', {'name': billing.name, 'report': report})

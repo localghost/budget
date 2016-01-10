@@ -1,11 +1,11 @@
 table#io_list {
     width: 100%;
     border-spacing: 0;
-    margin-bottom: 10px;
 }
 
 table#io_list .odd {
     background-color: #fff;
+    background-color: #e0e0e0;
 }
 
 table#io_list .even {
@@ -13,7 +13,6 @@ table#io_list .even {
 }
 
 table#io_list tr th {
-    background-color: #ddd;
     padding: 5px;
     text-align: left;
 }
@@ -21,4 +20,8 @@ table#io_list tr th {
 table#io_list tr td {
     padding: 5px;
     text-align: left;
+}
+
+#io_list a:hover {
+    background-color: inherit;
 }

@@ -7,6 +7,7 @@
 
 {% block css %}
 <link rel="stylesheet" href="{% static 'registry/report_view.css' %}">
+<link rel="stylesheet" href="{% static 'registry/report.css' %}">
 <link rel="stylesheet" href="{% static 'registry/io_list.css' %}">
 {% endblock %}
 
@@ -22,7 +23,7 @@
 </div>
 
 <div class="section">
-<div class="header">Rozchód per kategoria:</div>
+<div>Rozchód per kategoria:</div>
 {% for name, amount in category_outcome.items %}
 <div><span class="label">{{ name|default_if_none:'Brak kategorii' }}:</span><span class="value">{{ amount }}</span></div>
 {% endfor %}

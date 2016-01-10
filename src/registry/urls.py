@@ -22,9 +22,11 @@ app_name = 'registry'
 
 urlpatterns = [
     url(r'^$', views.IndexView.as_view(), name='index'),
+    url(r'^billings$', views.BillingsView.as_view(), name='billings'),
     url(r'^list_io$', views.ListIOView.as_view(), name='list_io'),
     url(r'^io/delete/(?P<id>\d+)/$', views.DeleteIOView.as_view(), name='delete_io'),
     url(r'^io/edit/(?P<id>\d+)/$', views.EditIOView.as_view(), name='edit_io'),
     url(r'^report$', views.ReportView.as_view(), name='report'),
     url(r'^report/view$', views.ReportViewView.as_view(), name='report_view'),
+    url(r'^billing/view/(?P<id>\d+)/$', views.BillingView.as_view(), name='billing/view'),
 ]

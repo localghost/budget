@@ -1,0 +1,22 @@
+{% extends 'registry/base.html' %}
+
+{% load staticfiles %}
+
+{% block scripts %}
+<script language="javascript">
+$(function() {
+
+});
+</script>
+{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'registry/report.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="header">{{ name }}</div>
+<div class="section">
+    {{ report|default_if_none:'' }}
+</div>
+{% endblock %}

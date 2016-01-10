@@ -1,0 +1,13 @@
+span.label {
+    color: #000;
+}
+
+span.value {
+    color: #560064;
+    color: #333;
+    margin-left: 10px;
+}
+
+div.section {
+    margin-bottom: 10px;
+}

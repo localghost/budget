@@ -1,0 +1,21 @@
+<div class="section">
+    <span class="label">Raport za:</span><span class="value">{{ report.start_date }} - {{ report.end_date }} ({{ report.closed|yesno:'zamknięty,otwarty' }})</span>
+</div>
+
+<div class="section">
+    <div>Przychód:</div>
+{% for income in report.incomes %}
+    <div class="income"><span class="label">{{ income.name }}</span><span class="value">{{ income.amount }}</span></div>
+{% endfor %}
+</div>
+
+<div class="section">
+    <div>Rozchód per kategoria:</div>
+{% for name, amount in report.categories.items %}
+    <div class="income"><span class="label">{{ name }}</span><span class="value">{{ amount }}</span></div>
+{% endfor %}
+</div>
+
+<div class="section">
+    <div>Stałe wydatki:</div>
+</div>

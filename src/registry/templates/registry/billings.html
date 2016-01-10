@@ -1,0 +1,31 @@
+{% extends 'registry/base.html' %}
+
+{% load staticfiles %}
+
+{% block scripts %}
+<script language="javascript">
+$(document).ready(function() {
+});
+</script>
+{% endblock %}  
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'registry/report.css' %}">
+<link rel="stylesheet" href="{% static 'registry/billings.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="header">Ostatni raport</div>
+{{ report|default_if_none:'' }}
+
+<div class="header middle">Wszystkie raporty</div>
+<div class="section">
+    {% for billing in billings %}
+        <div class="billing">
+            <span class="name"><a href="{% url 'registry:billing/view' billing.id %}">{{ billing.name }}</a></span>
+            <span class="dates">({{ billing.start_date }} - {{ billing.end_date|default_if_none:'dzisiaj' }})</span>
+        </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

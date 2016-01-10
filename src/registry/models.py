@@ -62,3 +62,18 @@ class IOModel(models.Model):
     
     def __str__(self):
         return self.name
+
+
+@python_2_unicode_compatible
+class BillingModel(models.Model):
+    name = models.CharField(max_length=200)
+    start_date = models.DateField(unique=True)
+    end_date = models.DateField(blank=True, null=True, unique=True)
+    
+    class Meta:
+        ordering = ['start_date']
+        verbose_name = 'billing'
+        verbose_name_plural = 'billings'
+        
+    def __str__(self):
+        return self.name

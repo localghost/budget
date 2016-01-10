@@ -1,6 +1,17 @@
 body {
     padding: 0;
     margin: 0;
+    background-color: #eee;
+}
+
+a {
+    color: #31698a;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #fff;
+    background-color: #31698a; 
 }
 
 #mainmenu {
@@ -16,13 +27,16 @@ body {
     text-decoration: none;
     color: #fff;
     font-variant: small-caps;
-    margin-left: 10px;
+    margin-left: 20px;
     font-family: Audiowide, sans-serif;
+    font-size: 1.1em;
 }
 
 
 #mainmenu a:hover {
     color: #ffb400;
+    color: #777;
+    background-color: inherit;
 }
 
 #content-wrapper {
@@ -34,4 +48,18 @@ body {
     width: 70%;
     text-align: left;
     font-family: Comfortaa, sans-serif;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1em;
+}
+
+div.header {
+    font-size: 1.25em;
+    border-bottom: 1px solid #999;
+    margin-bottom: 10px;
+    border-left: 5px solid #999;
+    padding-left: 5px;
+}
+
+div.middle {
+    margin-top: 20px;
 }
