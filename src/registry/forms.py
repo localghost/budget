@@ -17,9 +17,12 @@ class IOForm(ModelForm):
 class ListIOFilterForm(forms.Form):
     start_date = forms.DateField(required=False, label="Od")
     end_date = forms.DateField(required=False, label="Do")
+    type = forms.ChoiceField(required=False, label="Typ")
     category = forms.ModelChoiceField(required=False, queryset=CategoryModel.objects.all(), label="Kategoria")
     
     def __init__(self, *args, **kwargs):
         self.label_suffix = ':'
         
         super(ListIOFilterForm, self).__init__(*args, **kwargs)
+        
+        self.fields['type'].choices = (('', '--------'),) + IOModel.TYPE_CHOICES

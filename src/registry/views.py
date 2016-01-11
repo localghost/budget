@@ -74,6 +74,8 @@ class ListIOView(View):
 				filter_args['registered__lte'] = form.cleaned_data['end_date']
 			if form.cleaned_data['category']:
 				filter_args['category'] = form.cleaned_data['category']
+			if form.cleaned_data['type']:
+				filter_args['type'] = form.cleaned_data['type']
 			ios = IOModel.objects.filter(**filter_args).order_by('registered')
 		else:
 			ios = IOModel.objects.all().order_by('registered')
