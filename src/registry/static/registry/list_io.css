@@ -12,10 +12,12 @@
     width: 160px;
 }
 
-label[for=id_end_date],
-label[for=id_category],
-label[for=id_type] {
+#io_list_filter label {
     margin-left: 20px;
+}
+
+#io_list_filter label[for=id_start_date] {
+    margin-left: 0px;
 }
 
 #io_list_filter .middle {

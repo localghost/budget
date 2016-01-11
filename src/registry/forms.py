@@ -1,3 +1,5 @@
+# vim: set fileencoding=utf-8 :
+
 from django.forms import ModelForm
 from models import IOModel, CategoryModel, PaymentMethodModel
 from django.db.models.functions import Lower
@@ -34,6 +36,7 @@ class ListIOFilter(django_filters.FilterSet):
     end_date = django_filters.DateFilter(lookup_type='lte', label="Do", help_text='', name='registered')
     type = django_filters.ChoiceFilter(label="Typ", help_text='')
     category = django_filters.ModelChoiceFilter(queryset=CategoryModel.objects.all(), label="Kategoria", help_text='')
+    payment_method = django_filters.ModelChoiceFilter(queryset=PaymentMethodModel.objects.all(), label="Płatność", help_text='')
     
     class Meta:
         model = IOModel
