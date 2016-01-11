@@ -1,0 +1,22 @@
+#io_list_filter {
+    margin-bottom: 40px;
+}
+
+#io_list_filter label {
+    display: inline-block;
+    margin-right: 5px;
+}
+
+#id_start_date,
+#id_end_date {
+    width: 160px;
+}
+
+label[for=id_end_date],
+label[for=id_category] {
+    margin-left: 20px;
+}
+
+#io_list_filter .middle {
+    margin-left: 20px;
+}

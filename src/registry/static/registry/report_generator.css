@@ -5,14 +5,7 @@ form#report {
     margin-bottom: 40px;
 }
 
-form#report input[type=date] {
-    border: 3px solid #ddd;
-    padding: 10px;
-    width: 160px;
-}
-
 form#report input[type=submit] {
-    padding: 10px;
     margin-left: 20px;
 }
 

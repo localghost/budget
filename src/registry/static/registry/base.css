@@ -20,7 +20,7 @@ input {
     padding: 10px;
 }
 
-input[type=text], input[type=number] {
+input[type=text], input[type=number], input[type=date] {
     border: 3px solid #ddd;
     font-size: 1em;
 }
@@ -29,7 +29,13 @@ input[type=submit] {
     font-size: 1em;
 }
 
+input[type=date] {
+
+    width: 160px;
+}
+
 select {
+    padding: 10px;
     font-size: 1em;
 }
 

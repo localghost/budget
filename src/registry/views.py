@@ -8,7 +8,7 @@ from django.core.urlresolvers import reverse
 from django.utils.dateparse import parse_date
 
 from .models import IOModel, CategoryModel, BillingCycleModel
-from .forms import IOForm
+from .forms import IOForm, ListIOFilterForm
 from .reports import OverviewReport
 
 # class Referer(object):
@@ -61,7 +61,23 @@ class BillingsView(View):
 
 class ListIOView(View):
 	def get(self, request):
-		return render(request, r'registry/list_io.html', {'ios': IOModel.objects.all().order_by('registered')})
+		form = ListIOFilterForm(initial={'end_date': datetime.datetime.now().strftime('%Y-%m-%d')})
+		return render(request, r'registry/list_io.html', {'ios': IOModel.objects.all().order_by('registered'), 'form': form})
+	
+	def post(self, request):
+		form = ListIOFilterForm(request.POST)
+		if form.is_valid():
+			filter_args = {}
+			if form.cleaned_data['start_date']:
+				filter_args['registered__gte'] = form.cleaned_data['start_date']
+			if form.cleaned_data['end_date']:
+				filter_args['registered__lte'] = form.cleaned_data['end_date']
+			if form.cleaned_data['category']:
+				filter_args['category_id'] = int(form.cleaned_data['category'])
+			ios = IOModel.objects.filter(**filter_args).order_by('registered')
+		else:
+			ios = IOModel.objects.all().order_by('registered')
+		return render(request, r'registry/list_io.html', {'ios': ios, 'form': form})
 
 
 class DeleteIOView(View):

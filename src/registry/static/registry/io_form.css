@@ -4,22 +4,6 @@ form#io {
     margin: auto auto;
 }
 
-form#io input[type=text], input[type=number] {
-    border: 3px solid #ddd;
-    padding: 10px;
-    font-size: 1em;
-}
-
-form#io select {
-    padding: 10px;
-    font-size: 1em;
-}
-
-form#io input[type=submit] {
-    padding: 10px;
-    font-size: 1em;
-}
-
 form#io div {
     margin-bottom: 10px;
 }
@@ -36,4 +20,3 @@ form#io #id_name {
 form#io #id_registered {
     width: 160px;
 }
-

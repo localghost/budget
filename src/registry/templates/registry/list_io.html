@@ -5,15 +5,23 @@
 {% block scripts %}
 <script language="javascript">
 $(document).ready(function() {
+    $('#id_start_date').datepicker({dateFormat: "yy-mm-dd"});
+    $('#id_end_date').datepicker({dateFormat: "yy-mm-dd"});
 });
 </script>
 {% endblock %}
 
 {% block css %}
 <link rel="stylesheet" href="{% static 'registry/io_list.css' %}">
+<link rel="stylesheet" href="{% static 'registry/list_io.css' %}">
 {% endblock %}
 
 {% block content %}
+<form id="io_list_filter" name="io_list_filter" action="{% url 'registry:list_io' %}" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input class="middle" type="submit" value="Filtruj" />
+</form>
 {% if ios %}
 {% include "registry/io_list.html" %}
 {% endif %}
