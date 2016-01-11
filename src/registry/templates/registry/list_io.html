@@ -7,6 +7,10 @@
 $(document).ready(function() {
     $('#id_start_date').datepicker({dateFormat: "yy-mm-dd"});
     $('#id_end_date').datepicker({dateFormat: "yy-mm-dd"});
+    if ($('#id_end_date').val() == '')
+    {
+        $('#id_end_date').datepicker('setDate', new Date());
+    }
 });
 </script>
 {% endblock %}
@@ -19,7 +23,7 @@ $(document).ready(function() {
 {% block content %}
 <form id="io_list_filter" name="io_list_filter" action="{% url 'registry:list_io' %}" method="post">
     {% csrf_token %}
-    {{ form }}
+    {{ filter.form }}
     <input class="middle" type="submit" value="Filtruj" />
 </form>
 {% if ios %}

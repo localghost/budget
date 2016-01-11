@@ -17,6 +17,7 @@ RUN apt-get install -y ansible
 
 RUN apt-get install -y python-pip
 RUN pip install Django
+RUN pip install django-filter
 
 # setup Eclipse
 #RUN wget http://artfiles.org/eclipse.org//technology/epp/downloads/release/mars/1/eclipse-cpp-mars-1-linux-gtk-x86_64.tar.gz -O /tmp/eclipse.tgz --no-verbose

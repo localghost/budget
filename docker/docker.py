@@ -59,7 +59,7 @@ class DockerService(object):
 
 class Docker(object):
     def build(self, path, tag=None):
-        command = 'docker build'
+        command = 'docker build --no-cache'
         
         if tag:
             command += ' -t %s' % tag
