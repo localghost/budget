@@ -5,7 +5,7 @@ from django.utils.encoding import python_2_unicode_compatible
 
 @python_2_unicode_compatible
 class PaymentMethodModel(models.Model):
-    name = models.CharField(max_length=200)
+    name = models.CharField(max_length=200, unique=True)
 
     class Meta:
         ordering = ['name']
@@ -20,7 +20,7 @@ class PaymentMethodModel(models.Model):
 class CategoryModel(models.Model):
     NAMESPACE_SEPARATOR = r'/'
     
-    name = models.CharField(max_length=200)
+    name = models.CharField(max_length=200, unique=True)
     
     class Meta:
         ordering = ['name']
