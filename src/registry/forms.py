@@ -16,6 +16,7 @@ class IOForm(ModelForm):
         super(IOForm, self).__init__(*args, **kwargs)   
         self.fields['category'].queryset = CategoryModel.objects.order_by(Lower('name'))
         self.fields['payment_method'].queryset = PaymentMethodModel.objects.order_by(Lower('name'))
+        self.fields['registered'].widget.format = '%Y-%m-%d'
 
 
 # class ListIOFilterForm(forms.Form):
