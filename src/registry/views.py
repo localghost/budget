@@ -1,5 +1,6 @@
 import datetime
-import collections
+
+from collections import OrderedDict
 
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
@@ -122,13 +123,13 @@ class ReportViewView(View):
 				total_income += io.amount
 			elif io.type == IOModel.OUTCOME:
 				total_outcome += io.amount
-				separator_position = io.category.name.find(CategoryModel.NAMESPACE_SEPARATOR)
+				category_name = io.category.name if io.category is not None else '_inne_'
+				separator_position = category_name.find(CategoryModel.NAMESPACE_SEPARATOR)
 				while separator_position != -1:
-					amount = category_outcome.get(io.category.name[:separator_position], 0)
-					category_outcome[io.category.name[:separator_position]] = amount + io.amount
-					separator_position = io.category.name.find(CategoryModel.NAMESPACE_SEPARATOR, separator_position + 1)
-				amount = category_outcome.get(io.category.name, 0)
-				category_outcome[io.category.name] = amount + io.amount
+					amount = category_outcome.get(category_name[:separator_position], 0)
+					category_outcome[category_name[:separator_position]] = amount + io.amount
+					separator_position = category_name.find(CategoryModel.NAMESPACE_SEPARATOR, separator_position + 1)
+				category_outcome[category_name] = category_outcome.get(category_name, 0) + io.amount
 
 		return render(
 			request, r'registry/report_view.html',
@@ -139,7 +140,7 @@ class ReportViewView(View):
 				'total_outcome': total_outcome,
 				'total_income': total_income,
 				'total_balance': total_income - total_outcome,
-				'category_outcome' : collections.OrderedDict(sorted(category_outcome.items(), key=lambda t: t[0])),
+				'category_outcome' : OrderedDict(sorted(category_outcome.items(), key=lambda item: item[0].lower)),
 			}
 		)
 

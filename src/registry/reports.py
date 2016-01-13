@@ -5,6 +5,8 @@ from django.utils.encoding import python_2_unicode_compatible
 
 from models import IOModel, CategoryModel
 
+from collections import OrderedDict
+
 class GeneralReport(object):
     def __init__(self, start_date, end_date = datetime.date.today()):
         pass
@@ -46,10 +48,10 @@ class OverviewReport(object):
         
         categories = {}
         for io in ios:
-            name = io.category.name.split(CategoryModel.NAMESPACE_SEPARATOR)[0]
+            name = io.category.name.split(CategoryModel.NAMESPACE_SEPARATOR)[0] if io.category is not None else '_inne_'
             categories[name] = categories.get(name, 0) + io.amount
 
-        return categories
+        return OrderedDict(sorted(categories.items(), key=lambda item: item[0].lower))
     
     def __str__(self):
         return render_to_string(r'registry/overview_report.html', {'report': self})
