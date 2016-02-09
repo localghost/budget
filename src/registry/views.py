@@ -6,6 +6,7 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.views.generic import View
 from django.core.urlresolvers import reverse
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.utils.dateparse import parse_date
 
 from .models import IOModel, CategoryModel, BillingCycleModel
@@ -62,12 +63,26 @@ class BillingsView(View):
 
 class ListIOView(View):
 	def get(self, request):
-		filter = ListIOFilter(queryset=IOModel.objects.all().order_by('registered'))
-		return render(request, r'registry/list_io.html', {'ios': filter, 'filter': filter})
+		filter = ListIOFilter(request.GET, queryset=IOModel.objects.all().order_by('registered'))
+		query = request.GET.copy()
+		ios = self.paginate(filter.qs, int(query.pop('page', [1])[-1]), 100)
+		
+		return render(request, r'registry/list_io.html', {'ios': ios, 'filter': filter, 'query': query})
 	
-	def post(self, request):
-		filter = ListIOFilter(request.POST, queryset=IOModel.objects.all().order_by('registered'))
-		return render(request, r'registry/list_io.html', {'ios': filter, 'filter': filter})
+# 	def post(self, request):
+# 		filter = ListIOFilter(request.POST, queryset=IOModel.objects.all().order_by('registered'))
+# 		ios = self.paginate(filter.qs, request.GET.get('page'))
+# 		return render(request, r'registry/list_io.html', {'ios': ios, 'filter': filter})
+	
+	def paginate(self, queryset, page, pageSize):
+		paginator = Paginator(queryset, pageSize)
+		try:
+			result = paginator.page(page)
+		except PageNotAnInteger:
+			result = paginator.page(1)
+		except EmptyPage:
+			result = paginator.page(paginator.num_pages)
+		return result
 
 
 class DeleteIOView(View):

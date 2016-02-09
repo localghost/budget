@@ -21,12 +21,29 @@ $(document).ready(function() {
 {% endblock %}
 
 {% block content %}
-<form id="io_list_filter" name="io_list_filter" action="{% url 'registry:list_io' %}" method="post">
+<form id="io_list_filter" name="io_list_filter" action="{% url 'registry:list_io' %}" method="get">
     {% csrf_token %}
     {{ filter.form }}
     <input class="middle" type="submit" value="Filtruj" />
 </form>
 {% if ios %}
 {% include "registry/io_list.html" %}
+
+{% if ios.paginator.num_pages > 1 %}
+<div id="paginator">
+    {% if ios.has_previous %}
+        <a href="?{{ query.urlencode }}&page=1" class="page_previous">&lt;&lt;</a>
+        <a href="?{{ query.urlencode }}&page={{ ios.previous_page_number }}" class="page_previous">&lt;</a>
+    {% endif %}
+    
+    <span class="current_page">{{ ios.number }} / {{ ios.paginator.num_pages }}</span>
+    
+    {% if ios.has_next %}
+        <a href="?{{ query.urlencode }}&page={{ ios.next_page_number }}" class="page_next">&gt;</a>
+        <a href="?{{ query.urlencode }}&page={{ ios.paginator.num_pages }}" class="page_next">&gt;&gt;</a>
+    {% endif %}
+</div>
+{% endif %}
+
 {% endif %}
 {% endblock %}

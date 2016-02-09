@@ -88,3 +88,13 @@ div.header {
 div.middle {
     margin-top: 40px;
 }
+
+#paginator {
+    margin-top: 10px;
+    text-align: center;
+}
+
+#paginator a.page_previous,
+#paginator a.page_next{
+    font-weight: bold;
+}
