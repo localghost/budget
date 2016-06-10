@@ -15,6 +15,8 @@ table#io_list .even {
 table#io_list tr th {
     padding: 5px;
     text-align: left;
+    font-weight: normal;
+    text-decoration: underline;
 }
 
 table#io_list tr td {

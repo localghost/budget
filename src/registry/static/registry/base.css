@@ -8,6 +8,8 @@ body {
 a {
     color: #31698a;
     text-decoration: none;
+    font-family: 'Open Sans', sans-serif;
+    font-family: 'Raleway', 'Open Sans', sans-serif;
 }
 
 a:hover {
@@ -18,12 +20,17 @@ a:hover {
 input {
     font-family: Comfortaa, sans-serif;
     font-family: 'Open Sans', sans-serif;
-    padding: 10px;
+    font-family: 'Raleway', 'Open Sans', sans-serif;
 }
 
 input[type=text], input[type=number], input[type=date] {
     border: 1px solid #bbb;
     font-size: 1em;
+    padding: 5px;
+}
+
+input[type=number], input[type=date], input[data-type='date'] {
+    text-align: right;
 }
 
 input[type=submit] {
@@ -31,40 +38,35 @@ input[type=submit] {
 }
 
 input[type=date] {
-
     width: 160px;
 }
 
 select {
-    padding: 10px;
     font-size: 1em;
+    font-family: 'Raleway', 'Open Sans', sans-serif;
 }
 
 #mainmenu {
     margin-bottom: 20px;
-    /*background-color: #aaa;*/
-    /*border-bottom: 5px solid #999;*/
     padding: 30px 0;
-    /*margin-bottom: 40px;*/
     color: #333;
     text-align: center;
-    font-size: 1.2em;
 }
 
 #mainmenu a {
     text-decoration: none;
-    color: #777;
+    color: #555;
     font-variant: small-caps;
     margin-left: 20px;
-    font-family: Audiowide, sans-serif;
-    font-size: 1.1em;
     text-shadow: 0px 1px 0px #fff
+    font-family: 'Raleway', 'Open Sans', sans-serif;
+    font-size: 1.4em;
 }
 
 
 #mainmenu a:hover {
     color: #ff8000;
-    color: #555;
+    color: #777;
     background-color: inherit;
 }
 
@@ -77,20 +79,20 @@ select {
     width: 70%;
     text-align: left;
     font-family: Comfortaa, sans-serif;
-    font-family: Gotham, 'Open Sans', sans-serif;
+    font-family: 'Open Sans', sans-serif;
+    font-family: 'Raleway', 'Open Sans', sans-serif;
     font-size: 1em;
 }
 
 div.header {
-    font-size: 1.25em;
-    border-bottom: 1px solid #999;
-    margin-bottom: 10px;
-    border-left: 5px solid #999;
-    padding-left: 5px;
+    font-size: 1em;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    text-align: center;
 }
 
 div.middle {
-    margin-top: 40px;
+    margin-top: 60px;
 }
 
 #paginator {
