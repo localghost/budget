@@ -5,8 +5,15 @@
 {% block scripts %}
 <script language="javascript">
 $(function() {
-    $('#start_date').datepicker({dateFormat: "yy-mm-dd"});
-    $('#end_date').datepicker({dateFormat: "yy-mm-dd"}).datepicker('setDate', new Date());
+    $('#start_date').datetimepicker({
+        timepicker: false,
+        format: 'Y-m-d'
+    });
+    $('#end_date').datetimepicker({
+        timepicker: false,
+        value: new Date(),
+        format: 'Y-m-d'
+    });
 });
 </script>
 {% endblock %}

@@ -5,7 +5,11 @@
 {% block scripts %}
 <script language="javascript">
 $(document).ready(function() {
-    $('#id_registered').datepicker({dateFormat: "yy-mm-dd"}).datepicker('setDate', new Date());
+    $('#id_registered').datetimepicker({
+        timepicker: false,
+        value: new Date(),
+        format: 'Y-m-d'
+    });
 });
 </script>
 {% endblock %}  

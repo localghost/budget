@@ -5,11 +5,18 @@
 {% block scripts %}
 <script language="javascript">
 $(document).ready(function() {
-    $('#id_start_date').datepicker({dateFormat: "yy-mm-dd"});
-    $('#id_end_date').datepicker({dateFormat: "yy-mm-dd"});
+    $('#id_start_date').datetimepicker({
+        timepicker: false,
+        format: 'Y-m-d'
+    });
+    $('#id_end_date').datetimepicker({
+        timepicker: false,
+        defaultDate: new Date(),
+        format: 'Y-m-d'
+    });
     if ($('#id_end_date').val() == '')
     {
-        $('#id_end_date').datepicker('setDate', new Date());
+        $('#id_end_date').datetimepicker({value: new Date()});
     }
 });
 </script>

@@ -2,6 +2,7 @@ body {
     padding: 0;
     margin: 0;
     background-color: #eee;
+    background-image: url('images/bg.png')
 }
 
 a {
@@ -21,7 +22,7 @@ input {
 }
 
 input[type=text], input[type=number], input[type=date] {
-    border: 3px solid #ddd;
+    border: 1px solid #bbb;
     font-size: 1em;
 }
 
@@ -41,26 +42,29 @@ select {
 
 #mainmenu {
     margin-bottom: 20px;
-    background-color: #aaa;
-    border-bottom: 5px solid #999;
-    padding: 15px 2px;
-    margin-bottom: 40px;
+    /*background-color: #aaa;*/
+    /*border-bottom: 5px solid #999;*/
+    padding: 30px 0;
+    /*margin-bottom: 40px;*/
     color: #333;
+    text-align: center;
+    font-size: 1.2em;
 }
 
 #mainmenu a {
     text-decoration: none;
-    color: #fff;
+    color: #777;
     font-variant: small-caps;
     margin-left: 20px;
     font-family: Audiowide, sans-serif;
     font-size: 1.1em;
+    text-shadow: 0px 1px 0px #fff
 }
 
 
 #mainmenu a:hover {
-    color: #ffb400;
-    color: #777;
+    color: #ff8000;
+    color: #555;
     background-color: inherit;
 }
 
@@ -73,7 +77,7 @@ select {
     width: 70%;
     text-align: left;
     font-family: Comfortaa, sans-serif;
-    font-family: 'Open Sans', sans-serif;
+    font-family: Gotham, 'Open Sans', sans-serif;
     font-size: 1em;
 }
 
