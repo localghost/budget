@@ -147,7 +147,7 @@ class DockerContainerBuilder(object):
         command += ' %s' % self.__image
 
         if self.__command:
-            command += ' %s' % command
+            command += ' %s' % self.__command
 
         subprocess.check_call(command, shell=True)
 

@@ -3,7 +3,7 @@
 from django.forms import ModelForm
 from models import IOModel, CategoryModel, PaymentMethodModel
 from django.db.models.functions import Lower
-# from django import forms
+from django import forms
 import django_filters
 # import datetime
 
@@ -47,3 +47,11 @@ class ListIOFilter(django_filters.FilterSet):
         super(ListIOFilter, self).__init__(*args, **kwargs)
         self.form.label_suffix = ':'
         self.form.fields['type'].choices = (('', '--------'),) + IOModel.TYPE_CHOICES
+
+class ImportIOForm(forms.Form):
+    io_file = forms.FileField(required=True, label="Plik csv z transakcjami")
+
+    def __init__(self, *args, **kwargs):
+        self.label_suffix = ':'
+
+        super(ImportIOForm, self).__init__(*args, **kwargs)

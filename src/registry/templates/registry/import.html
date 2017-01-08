@@ -1,0 +1,54 @@
+{% extends 'registry/base.html' %}
+
+{% load staticfiles %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'registry/io_list.css' %}">
+<link rel="stylesheet" href="{% static 'registry/import.css' %}">
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'registry/import.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+
+{% if error is None %}
+    <table id="io_list">
+        <thead>
+        <tr>
+            <th style="text-align:center"><input type="checkbox" id="check-all" checked /></th>
+            <th>Data</th>
+            <th>Kwota</th>
+            <th>Kategoria</th>
+            <th>Nazwa</th>
+        </tr>
+        </thead>
+    {% for d in data %}
+        <tbody>
+        <tr class="{% cycle 'odd' 'even' %}">
+            <td style="width:5%; text-align: center;"><input type="checkbox" checked id="check-{{ forloop.counter }}"/></td>
+            <td name="date">{{ d.date|date:'Y-m-d' }}</td>
+            <td name="amount">{{ d.amount }}</td>
+            <td name="category">
+                <select>
+                    <option>---</option>
+                    {% for category in categories %}
+                        <option value="{{ category.id }}" {% if category.name == d.Categorizer__category %}selected{% endif %}>{{ category.name }}</option>
+                    {% endfor %}
+                </select>
+            </td>
+            <td name="description" style="width:60%;"><input type="text" value="{{ d.description }}" style="width: 100%"/></td>
+        </tr>
+        </tbody>
+    {% endfor %}
+    </table>
+
+    <div id="button-import-wrapper">
+        <input type="button" value="Zaimportuj" id="button-import"/>
+    </div>
+{% else %}
+    <div class="error-message">{{ error }}</div>
+{% endif %}
+
+{% endblock %}

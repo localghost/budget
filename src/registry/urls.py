@@ -15,10 +15,13 @@ Including another URLconf
     3. Add a URL to urlpatterns:  url(r'^blog/', include(blog_urls))
 """
 from django.conf.urls import url
+from rest_framework.urlpatterns import format_suffix_patterns
 
 from . import views
+from . import api_views
 
 app_name = 'registry'
+
 
 urlpatterns = [
     url(r'^$', views.IndexView.as_view(), name='index'),
@@ -29,4 +32,12 @@ urlpatterns = [
     url(r'^report$', views.ReportView.as_view(), name='report'),
     url(r'^report/view$', views.ReportViewView.as_view(), name='report_view'),
     url(r'^billing/view/(?P<id>\d+)/$', views.BillingView.as_view(), name='billing/view'),
+    url(r'^import$', views.ImportIOView.as_view(), name='import')
 ]
+
+apiurls = [
+    url(r'^api/io/$', api_views.ApiIOVIew.as_view(), name='api-io'),
+    url(r'^api/io-simple/$', api_views.ApiIOSimpleView.as_view(), name='api-io-simple')
+]
+
+urlpatterns += format_suffix_patterns(apiurls)

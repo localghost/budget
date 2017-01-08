@@ -18,13 +18,14 @@ RUN apt-get install -y ansible
 RUN apt-get install -y python-pip
 RUN pip install Django
 RUN pip install django-filter
+RUN pip install djangorestframework
 
 # setup Eclipse
-#RUN wget http://artfiles.org/eclipse.org//technology/epp/downloads/release/mars/1/eclipse-cpp-mars-1-linux-gtk-x86_64.tar.gz -O /tmp/eclipse.tgz --no-verbose
-RUN wget https://googledrive.com/host/0BwwQN8QrgsRpLVlDeHRNemw3S1E/LiClipse%202.4.0/liclipse_2.4.0_linux.gtk.x86_64.tar.gz -O /tmp/eclipse.tgz --no-verbose
-RUN tar -C /opt -xzf /tmp/eclipse.tgz
-RUN rm -f /tmp/eclipse.tgz
-RUN ln -s /opt/eclipse/eclipse /usr/local/bin
+##RUN wget http://artfiles.org/eclipse.org//technology/epp/downloads/release/mars/1/eclipse-cpp-mars-1-linux-gtk-x86_64.tar.gz -O /tmp/eclipse.tgz --no-verbose
+#RUN wget https://googledrive.com/host/0BwwQN8QrgsRpLVlDeHRNemw3S1E/LiClipse%202.4.0/liclipse_2.4.0_linux.gtk.x86_64.tar.gz -O /tmp/eclipse.tgz --no-verbose
+#RUN tar -C /opt -xzf /tmp/eclipse.tgz
+#RUN rm -f /tmp/eclipse.tgz
+#RUN ln -s /opt/eclipse/eclipse /usr/local/bin
 
 RUN groupadd --gid {gid} {login}
 RUN useradd --uid {uid} --gid {gid} -G sudo -m {login} --base-dir {home_dir}

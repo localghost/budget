@@ -1,4 +1,7 @@
+# -*- coding: utf-8 -*-
+
 import datetime
+import logging
 
 from collections import OrderedDict
 
@@ -10,9 +13,11 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.utils.dateparse import parse_date
 
 from .models import IOModel, CategoryModel, BillingCycleModel
-from .forms import IOForm, ListIOFilter
+from .forms import IOForm, ListIOFilter, ImportIOForm, PaymentMethodModel
 from .reports import OverviewReport
+from .import_parser import MBankCsvParser, MBANK_FILTERS
 
+logger = logging.getLogger('django')
 # class Referer(object):
 # 	refererFieldName = 'referer'
 # 	def __init__(self, request, default=None):
@@ -41,17 +46,42 @@ class IndexView(View):
 			return HttpResponseRedirect(reverse('registry:index'))
 		else:
 			return render(request, r'registry/index.html', self._make_context_with_form(form))
-		
+
 	def get(self, request):
-		return render(request, r'registry/index.html', self._make_context_with_form(IOForm()))
-	
+		context = self._make_context_with_form(IOForm())
+		context.update({'import_form': ImportIOForm()})
+		return render(
+			request,
+			r'registry/index.html',
+			context
+		)
+
 	def _make_context_with_form(self, form):
 		return {
 			'form' : form,
 			'ios' : IOModel.objects.order_by('-updated')[:10]
 		}
 
-	
+class ImportIOView(View):
+    def post(self, request):
+        form = ImportIOForm(request.POST, request.FILES)
+        if form.is_valid():
+            data = MBankCsvParser().parse(request.FILES['io_file'])
+            data = self._filter(data)
+            return render(request, r'registry/import.html', dict(data=data, categories=CategoryModel.objects.all()))
+        else:
+            return render(request, r'registry/import.html', dict(error="Failed to import selected file."))
+
+    def _filter(self, data):
+        result = []
+        for d in data:
+            for filter in MBANK_FILTERS:
+                d = filter(d)
+            if d is not None:
+                result.append(d)
+        return result
+
+
 class BillingsView(View):
 	def get(self, request):
 		billings = BillingCycleModel.objects.all().order_by('-start_date')
@@ -59,21 +89,21 @@ class BillingsView(View):
 		if len(billings) != 0:
 			report = OverviewReport(billings[0].start_date, billings[0].end_date)
 		return render(request, r'registry/billings.html', {'billings': billings, 'report': report})
-	
+
 
 class ListIOView(View):
 	def get(self, request):
 		filter = ListIOFilter(request.GET, queryset=IOModel.objects.all().order_by('registered'))
 		query = request.GET.copy()
 		ios = self.paginate(filter.qs, int(query.pop('page', [1])[-1]), 100)
-		
+
 		return render(request, r'registry/list_io.html', {'ios': ios, 'filter': filter, 'query': query})
-	
+
 # 	def post(self, request):
 # 		filter = ListIOFilter(request.POST, queryset=IOModel.objects.all().order_by('registered'))
 # 		ios = self.paginate(filter.qs, request.GET.get('page'))
 # 		return render(request, r'registry/list_io.html', {'ios': ios, 'filter': filter})
-	
+
 	def paginate(self, queryset, page, pageSize):
 		paginator = Paginator(queryset, pageSize)
 		try:
@@ -106,7 +136,7 @@ class EditIOView(View):
 			return HttpResponseRedirect(request.session.pop('referer', reverse('registry:index')))
 		else:
 			return render(request, r'registry/edit_io.html', {'form': form, 'io_id': id})
-	
+
 	def get(self, request, id):
 		form = IOForm(instance=IOModel.objects.get(pk=id))
 		request.session['referer'] = request.META.get('HTTP_REFERER', reverse('registry:index'))
@@ -122,17 +152,17 @@ class ReportViewView(View):
 		start_date = parse_date(request.GET.get('start_date'))
 		end_date = parse_date(request.GET.get('end_date', str(datetime.date.today())))
 		order_by = request.GET.get('order_by', 'registered')
-		
+
 		# TODO both above can be None, report only error in that case
 
 		ios = IOModel.objects.filter(
 			registered__gte=start_date,
 			registered__lte=end_date
 		).order_by(order_by)
-		
+
 		total_outcome = total_income = 0
 		category_outcome = {}
-		
+
 		for io in ios:
 			if io.type == IOModel.INCOME:
 				total_income += io.amount

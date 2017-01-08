@@ -28,6 +28,7 @@ def main():
         .with_tty() \
         .with_interactive() \
         .with_publish('8000:8000') \
+        .with_command('bash -c "cd /opt/sources/budget/src && python manage.py runserver 0.0.0.0:8000"') \
         .run()
 
 if __name__ == '__main__':

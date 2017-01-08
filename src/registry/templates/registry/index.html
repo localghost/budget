@@ -28,6 +28,14 @@ $(document).ready(function() {
     <div id="id_submit_div"><label></label><input type="submit" value="Dodaj"></div>
 </form>
 
+<form name="import" id="import" method="post" action="{% url 'registry:import' %}" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    {{ import_form }}
+
+    <div><label></label><input type="submit" value="Importuj"></div>
+</form>
+
 {% if ios %}
 <div class="header middle">Ostatnio dodane</div>
 {% include "registry/io_list.html" %}

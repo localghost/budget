@@ -26,15 +26,16 @@ input {
 input[type=text], input[type=number], input[type=date] {
     border: 1px solid #bbb;
     font-size: 1em;
-    padding: 5px;
+    padding: 3px;
 }
 
 input[type=number], input[type=date], input[data-type='date'] {
     text-align: right;
 }
 
-input[type=submit] {
+input[type=submit], input[type=button] {
     font-size: 1em;
+    padding: 3px;
 }
 
 input[type=date] {
@@ -44,6 +45,7 @@ input[type=date] {
 select {
     font-size: 1em;
     font-family: 'Raleway', 'Open Sans', sans-serif;
+    padding: 3px;
 }
 
 #mainmenu {
@@ -66,7 +68,7 @@ select {
 
 #mainmenu a:hover {
     color: #ff8000;
-    color: #777;
+    color: #333;
     background-color: inherit;
 }
 
@@ -103,4 +105,8 @@ div.middle {
 #paginator a.page_previous,
 #paginator a.page_next{
     font-weight: bold;
+}
+
+.error-message {
+    color: #ff0000;
 }
