@@ -202,4 +202,10 @@ MBANK_FILTERS = [
             ExcludeTransformation()
         ]
     ),
+    _Filter(
+        matcher=FieldMatcher('operation', 'WYPŁATA W BANKOMACIE'),
+        transformations=[
+            FieldReplaceTransformation('description', 'Wypłata w bankomacie')
+        ]
+    )
 ]
