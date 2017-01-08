@@ -38,7 +38,7 @@ function importIos() {
 
             var row = this;
             requests.push(
-                $.post({url: '/api/io-simple/', data: io, headers: { "X-CSRFToken": getCookie("csrftoken") }})
+                $.post('/api/io-simple/', io)
                     .done(function() { successes++; $('input:checkbox', row).prop('checked', false); })
                     .fail(function() { failures++; })
             );
@@ -53,4 +53,7 @@ $(document).ready(function() {
         $('#io_list tbody td input:checkbox').prop('checked', $(this).is(':checked'));
     });
     $('#button-import').click(importIos);
+    $.ajaxSetup({
+        headers: { "X-CSRFToken": $.cookie("csrftoken") }
+    });
 })
