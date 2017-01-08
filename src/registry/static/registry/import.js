@@ -38,7 +38,7 @@ function importIos() {
 
             var row = this;
             requests.push(
-                $.post('/api/io-simple/', io)
+                $.post({url: '/api/io-simple/', data: io, headers: { "X-CSRFToken": getCookie("csrftoken") }})
                     .done(function() { successes++; $('input:checkbox', row).prop('checked', false); })
                     .fail(function() { failures++; })
             );
