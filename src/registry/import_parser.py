@@ -53,7 +53,7 @@ class MBankCsvParser(object):
 
     @staticmethod
     def _toFloat(value):
-        value = value.replace(',', '.')
+        value = value.replace(',', '.').replace(' ', '')
         try:
             return float(value)
         except ValueError:
