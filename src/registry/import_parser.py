@@ -199,7 +199,8 @@ MBANK_FILTERS = [
     _Filter(
         matcher=FieldMatcher('operation', 'PRZELEW WŁASNY'),
         transformations=[
-            ExcludeTransformation()
+            # ExcludeTransformation()
+            FieldReplaceTransformation('description', 'Przelew własny')
         ]
     ),
     _Filter(
