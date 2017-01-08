@@ -77,6 +77,7 @@ class ImportIOView(View):
         for d in data:
             for filter in MBANK_FILTERS:
                 d = filter(d)
+                if d is None: break
             if d is not None:
                 result.append(d)
         return result
