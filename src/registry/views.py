@@ -3,7 +3,7 @@
 import datetime
 import logging
 
-from collections import OrderedDict
+from collections import OrderedDict, defaultdict
 
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
@@ -161,21 +161,21 @@ class ReportViewView(View):
 			registered__lte=end_date
 		).order_by(order_by)
 
-		total_outcome = total_income = 0
-		category_outcome = {}
+		total = defaultdict(lambda: 0)
+		category_transfers = defaultdict(lambda: defaultdict(lambda: 0))
 
 		for io in ios:
-			if io.type == IOModel.INCOME:
-				total_income += io.amount
-			elif io.type == IOModel.OUTCOME:
-				total_outcome += io.amount
-				category_name = io.category.name if io.category is not None else '_inne_'
-				separator_position = category_name.find(CategoryModel.NAMESPACE_SEPARATOR)
-				while separator_position != -1:
-					amount = category_outcome.get(category_name[:separator_position], 0)
-					category_outcome[category_name[:separator_position]] = amount + io.amount
-					separator_position = category_name.find(CategoryModel.NAMESPACE_SEPARATOR, separator_position + 1)
-				category_outcome[category_name] = category_outcome.get(category_name, 0) + io.amount
+			transfer_type = 'income' if io.type == IOModel.INCOME else 'outcome'
+
+			total[transfer_type] += io.amount
+
+			category_name = io.category.name if io.category is not None else '_inne_'
+			separator_position = category_name.find(CategoryModel.NAMESPACE_SEPARATOR)
+			while separator_position != -1:
+				category_part = category_name[:separator_position]
+				category_transfers[category_part][transfer_type] += io.amount
+				separator_position = category_name.find(CategoryModel.NAMESPACE_SEPARATOR, separator_position + 1)
+			category_transfers[category_name][transfer_type] += io.amount
 
 		return render(
 			request, r'registry/report_view.html',
@@ -183,10 +183,8 @@ class ReportViewView(View):
 				'ios': ios,
 				'start_date': start_date,
 				'end_date': end_date,
-				'total_outcome': total_outcome,
-				'total_income': total_income,
-				'total_balance': total_income - total_outcome,
-				'category_outcome' : OrderedDict(sorted(category_outcome.items(), key=lambda item: item[0].lower)),
+				'total': total,
+				'category_transfers': OrderedDict(sorted(category_transfers.items(), key=lambda item: item[0].lower)),
 			}
 		)
 

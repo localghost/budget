@@ -10,4 +10,8 @@ def filter_sort(value):
     elif isinstance(value, (list, tuple)):
         return sorted(value)
     return value
+
+@register.filter(name='sub')
+def filter_sub(minuend, subtrahend):
+    return minuend - subtrahend
     

@@ -13,3 +13,11 @@ span.value {
 div.section {
     margin-bottom: 10px;
 }
+
+span.income {
+    color: green;
+}
+
+span.outcome {
+    color: red;
+}

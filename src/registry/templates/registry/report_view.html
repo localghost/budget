@@ -19,15 +19,26 @@
 </div>
 
 <div class="section">
-    <span class="label">Przychód:</span><span class="value">{{ total_income }}</span>
-    <span class="label">, rozchód:</span><span class="value">{{ total_outcome }}</span>
+    <span class="label">Przychód:</span><span class="value income">{{ total_income }}</span>
+    <span class="label">, rozchód:</span><span class="value outcome">{{ total_outcome }}</span>
     <span class="label">, bilans:</span><span class="value">{{ total_balance }}</span>       
 </div>
 
 <div class="section">
-<div>Rozchód per kategoria:</div>
-{% for name, amount in category_outcome.items %}
-    <div><span class="label">{{ name|default_if_none:'Brak kategorii' }}:</span><span class="value">{{ amount }}</span></div>
+<div>Rozliczenie per kategoria:</div>
+{% for name, transfer in category_transfers.items %}
+    <div>
+        <span class="label">{{ name|default_if_none:'Brak kategorii' }}:</span>
+        {% if transfer.income != 0 %}
+            <span class="value income">{{ transfer.income }}</span>
+        {% endif %}
+        {% if transfer.outcome != 0 %}
+            <span class="value outcome">{{ transfer.outcome }}</span>
+        {% endif %}
+        {% if transfer.income != 0 and transfer.outcome != 0 %}
+            <span class="value">{{ transfer.income|sub:transfer.outcome }}</span>
+        {% endif %}
+    </div>
 {% endfor %}
 </div>
 
