@@ -1,6 +1,7 @@
 {% extends 'registry/base.html' %}
 
 {% load staticfiles %}
+{% load mathfilters %}
 
 {% block scripts %}
 {% endblock %}
@@ -19,9 +20,12 @@
 </div>
 
 <div class="section">
-    <span class="label">Przychód:</span><span class="value income">{{ total_income }}</span>
-    <span class="label">, rozchód:</span><span class="value outcome">{{ total_outcome }}</span>
-    <span class="label">, bilans:</span><span class="value">{{ total_balance }}</span>       
+    Ogółem:
+    <span class="value income">+{{ total.income }}</span>
+    <span class="value outcome">-{{ total.outcome }}</span>
+    {% with total.income|sub:total.outcome as balance %}
+        <span class="value {% if balance >= 0 %}income{% else %}outcome{% endif %}">{{ balance }}</span>
+    {% endwith %}
 </div>
 
 <div class="section">
@@ -30,13 +34,15 @@
     <div>
         <span class="label">{{ name|default_if_none:'Brak kategorii' }}:</span>
         {% if transfer.income != 0 %}
-            <span class="value income">{{ transfer.income }}</span>
+            <span class="value income">+{{ transfer.income }}</span>
         {% endif %}
         {% if transfer.outcome != 0 %}
-            <span class="value outcome">{{ transfer.outcome }}</span>
+            <span class="value outcome">-{{ transfer.outcome }}</span>
         {% endif %}
         {% if transfer.income != 0 and transfer.outcome != 0 %}
-            <span class="value">{{ transfer.income|sub:transfer.outcome }}</span>
+            {% with transfer.income|sub:transfer.outcome as balance %}
+                <span class="value {% if balance >= 0 %}income{% else %}outcome{% endif %}">{{ balance }}</span>
+            {% endwith %}
         {% endif %}
     </div>
 {% endfor %}
