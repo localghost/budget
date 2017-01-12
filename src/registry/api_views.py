@@ -35,3 +35,11 @@ class ApiIOSimpleView(generics.ListCreateAPIView):
         kwargs['type'] = models.IOModel.INCOME if amount >= 0 else models.IOModel.OUTCOME
 
         serializer.save(**kwargs)
+
+class ApiCategoryView(generics.ListAPIView):
+    queryset = models.CategoryModel.objects.all()
+    serializer_class = serializers.CategorySerializer
+
+class ApiPaymentMethodView(generics.ListAPIView):
+    queryset = models.PaymentMethodModel.objects.all()
+    serializer_class = serializers.PaymentMethodSerializer

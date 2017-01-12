@@ -37,7 +37,9 @@ urlpatterns = [
 
 apiurls = [
     url(r'^api/io/$', api_views.ApiIOVIew.as_view(), name='api-io'),
-    url(r'^api/io-simple/$', api_views.ApiIOSimpleView.as_view(), name='api-io-simple')
+    url(r'^api/io-simple/$', api_views.ApiIOSimpleView.as_view(), name='api-io-simple'),
+    url(r'^api/category/$', api_views.ApiCategoryView.as_view(), name='api-category'),
+    url(r'^api/payment-method/$', api_views.ApiPaymentMethodView.as_view(), name='api-payment-method'),
 ]
 
 urlpatterns += format_suffix_patterns(apiurls)
