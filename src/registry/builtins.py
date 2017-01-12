@@ -11,7 +11,7 @@ def filter_sort(value):
         return sorted(value)
     return value
 
-@register.filter(name='sub')
-def filter_sub(minuend, subtrahend):
-    return minuend - subtrahend
+@register.filter(name='sign')
+def filter_sign(value):
+    return '%+.2f' % value
     

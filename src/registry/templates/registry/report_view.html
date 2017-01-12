@@ -24,7 +24,7 @@
     <span class="value income">+{{ total.income }}</span>
     <span class="value outcome">-{{ total.outcome }}</span>
     {% with total.income|sub:total.outcome as balance %}
-        <span class="value {% if balance >= 0 %}income{% else %}outcome{% endif %}">{{ balance }}</span>
+        <span class="value {% if balance >= 0 %}income{% else %}outcome{% endif %}">{{ balance|sign }}</span>
     {% endwith %}
 </div>
 
@@ -41,7 +41,7 @@
         {% endif %}
         {% if transfer.income != 0 and transfer.outcome != 0 %}
             {% with transfer.income|sub:transfer.outcome as balance %}
-                <span class="value {% if balance >= 0 %}income{% else %}outcome{% endif %}">{{ balance }}</span>
+                <span class="value {% if balance >= 0 %}income{% else %}outcome{% endif %}">{{ balance|sign }}</span>
             {% endwith %}
         {% endif %}
     </div>
