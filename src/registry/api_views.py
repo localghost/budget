@@ -5,7 +5,7 @@ import logging
 
 logger = logging.getLogger('django')
 
-class ApiIOVIew(generics.ListCreateAPIView):
+class ApiIOVIew(generics.ListCreateAPIView, generics.RetrieveUpdateDestroyAPIView):
     queryset = models.IOModel.objects.all()
     serializer_class = serializers.IOSerializer
 
